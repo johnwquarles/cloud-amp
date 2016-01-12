@@ -1,5 +1,4 @@
-import {Component} from 'angular2/core';
-import {EventEmitter} from 'angular2/core';
+import {Component, EventEmitter} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 import {Http} from 'angular2/http';
 

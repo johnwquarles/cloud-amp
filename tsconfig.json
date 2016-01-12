@@ -12,6 +12,7 @@
     "./src/app/app.ts",
     "./src/app/components/ampMain/ampMain.ts",
     "./src/app/components/queue/queue.ts",
+    "./src/app/components/trackInQueue/trackInQueue.ts",
     "./src/app/components/urlInput/urlInput.ts",
     "./src/main.ts",
     "./src/vendor.ts"
