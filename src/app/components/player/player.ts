@@ -10,37 +10,38 @@ export class Player {
   toPlayer: toPlayer;
   coors_proxy: string;
   context: any;
+  source: any;
 
   constructor() {
     this.coors_proxy = 'https://crossorigin.me/';
     this.context = new AudioContext();
+    this.source;
   }
 
   play() {
+    if (this.isPlaying()) this.stop();
     let request = new XMLHttpRequest();
     request.open('GET', this.coors_proxy + this.toPlayer.url, true);
     console.log(this.toPlayer.url);
     request.responseType = 'arraybuffer';
     request.onload = () => {
       this.context.decodeAudioData(request.response, (decodedBuffer) => {
-        let source = this.context.createBufferSource();
-        source.buffer = decodedBuffer;
-        source.connect(this.context.destination);
-        source.start(0);
-        console.log('started audio');
+        this.source = this.context.createBufferSource();
+        this.source.buffer = decodedBuffer;
+        this.source.connect(this.context.destination);
+        this.source.start(0);
       });
     }
     request.send();
   }
 
-  // prepare_buffer(response: any): void {
-  //   this.context.decodeAudioData(response, (decodedBuffer) => {
-  //     let source = this.context.createBufferSource();
-  //     source.buffer = decodedBuffer;
-  //     source.connect(this.context.destination);
-  //     source.start(0);
-  //   });
-  // }
+  stop() {
+    this.source.stop();
+  }
+
+  private isPlaying() {
+    return this.source && this.source.playbackState === this.source.PLAYING_STATE;
+  }
 };
 
 class toPlayer {
