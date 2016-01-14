@@ -1,4 +1,5 @@
 .ampMain
   p Amp Main (app)!
   url-input((addNewTrack)="addToQueue($event)")
-  queue([inputTrack]="trackToAdd")
+  queue([inputTrack]="trackToAdd", (emitClickedTrack)="sendTrackToPlayer($event)")
+  player([toPlayer]="sendToPlayer")

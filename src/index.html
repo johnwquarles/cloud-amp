@@ -42,6 +42,9 @@
     Loading...
   </app>
 
+  <script>
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+  </script>
   {% if (o.webpackConfig.metadata.ENV === 'development') { %}
   <!-- Webpack Dev Server reload -->
   <script src="http://{%= o.webpackConfig.metadata.host %}:{%= o.webpackConfig.metadata.port %}/webpack-dev-server.js"></script>

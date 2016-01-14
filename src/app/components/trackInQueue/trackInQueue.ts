@@ -1,5 +1,4 @@
-import {Component, EventEmitter} from 'angular2/core';
-import {Input} from 'angular2/core';
+import {Component, EventEmitter, Input} from 'angular2/core';
 
 @Component({
   outputs: ['emitTrackObj'],
@@ -16,7 +15,6 @@ export class TrackInQueue {
   };
 
   sendTrackObj() {
-    console.log('got click');
     this.emitTrackObj.emit(this.trackObj);
   }
 }
