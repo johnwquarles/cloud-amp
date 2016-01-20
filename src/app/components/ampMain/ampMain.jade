@@ -1,5 +1,10 @@
-.ampMain
-  p Amp Main (app)!
-  url-input((addNewTrack)="addToQueue($event)")
-  queue([inputTrack]="trackToAdd", (emitClickedTrack)="sendTrackToPlayer($event)")
-  player([toPlayer]="sendToPlayer")
+.container-fluid
+  .row.ampMain
+    .col-xs-12
+      p Amp Main (app)!
+    .col-xs-12
+      url-input((addNewTrack)="addToQueue($event)")
+    .col-xs-12
+      queue([inputTrack]="trackToAdd", (emitClickedTrack)="sendTrackToPlayer($event)")
+    .col-xs-12
+      player([toPlayer]="sendToPlayer")

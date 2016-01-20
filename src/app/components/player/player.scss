@@ -1,7 +1,43 @@
 .player {
-  border: 1px solid red;
-  display: inline-block;
-  h1 {
-    color: red;
+  display: block;
+
+  .art-overlay {
+    background-size: cover !important;
+  }
+
+  .title,
+  .artist {
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .artwork {
+    img {
+      margin: 15px auto 15px;
+      min-width: 40vw;
+      // import variables!
+      @media (min-width: 768px) {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  }
+
+  button {
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .playback-rate-value {
+    font-size: 2.6rem;
+    text-align: center;
+  }
+
+  .centered {
+    text-align: center;
   }
 }

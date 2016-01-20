@@ -59,8 +59,7 @@ module.exports = {
       // Support for .scss files.
       {
         test: /\.scss$/,
-        loader: 'raw-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader',
-        exclude: /node_modules/
+        loader: 'raw-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader'
       },
       // Support for .ts files.
       {

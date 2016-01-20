@@ -64,7 +64,9 @@ export class UrlInput {
       artwork_url: res.artwork_url,
       description: res.description,
       id: res.id,
-      genre: res.genre
+      genre: res.genre,
+      duration: res.duration,
+      artist: res.user.username
     };
   }
 }

@@ -1,5 +1,4 @@
-import {Component, EventEmitter} from 'angular2/core';
-import {SimpleChange} from 'angular2/core';
+import {Component, EventEmitter, SimpleChange} from 'angular2/core';
 import {TrackInQueue} from '../trackInQueue/trackInQueue';
 let _ = require('lodash');
 

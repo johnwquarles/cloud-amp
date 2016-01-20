@@ -1,4 +1,6 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, HostBinding, SimpleChange} from 'angular2/core';
+
+let ImageAnalyzer = require('../../services/AverageColor.ts');
 
 @Component({
   selector: 'player',
@@ -7,47 +9,80 @@ import {Component, Input} from 'angular2/core';
   template: require('./player.jade')
 })
 export class Player {
-  toPlayer: toPlayer;
-  coors_proxy: string;
-  context: any;
-  source: any;
+  public toPlayer: ToPlayer;
+
+  public backgroundColor: string;
+  public primaryColor: string;
+  public secondaryColor: string;
+  public detailColor: string;
+  public overlayColor: string;
+  public overlayGradient: string;
+
+  private coors_proxy: string;
+  private context: any;
+  private source: any;
+  private ImageAnalyzer: any;
 
   constructor() {
     this.coors_proxy = 'https://crossorigin.me/';
     this.context = new AudioContext();
-    this.source;
+    this.backgroundColor = 'white';
+    this.primaryColor = 'black';
+    this.secondaryColor = 'black';
+    this.detailColor = 'black';
   }
 
-  play() {
+  ngOnChanges(changes: TrackChange) {
+    let trackAdded = changes.toPlayer && changes.toPlayer.currentValue;
+    if (trackAdded) {
+      ImageAnalyzer(trackAdded.artwork_url, (bgColor, primaryColor, secondaryColor, detailColor) => {
+        this.backgroundColor = `rgb(${bgColor})`;
+        this.primaryColor = `rgb(${primaryColor})`;
+        this.secondaryColor = `rgb(${secondaryColor})`;
+        this.detailColor = `rgb(${detailColor})`;
+        this.overlayGradient = `linear-gradient(rgba(${bgColor},0.8) 0, rgba(${bgColor},0.8) 100%)`;
+        console.log(bgColor, primaryColor, secondaryColor, detailColor, this.overlayGradient);
+      });
+    }
+  }
+
+  private play(): void {
     if (this.isPlaying()) this.stop();
     let request = new XMLHttpRequest();
     request.open('GET', this.coors_proxy + this.toPlayer.url, true);
-    console.log(this.toPlayer.url);
     request.responseType = 'arraybuffer';
     request.onload = () => {
       this.context.decodeAudioData(request.response, (decodedBuffer) => {
         this.source = this.context.createBufferSource();
         this.source.buffer = decodedBuffer;
         this.source.connect(this.context.destination);
+        // want to access #slider here (from the markup). How?
         this.source.start(0);
       });
-    }
+    };
     request.send();
   }
 
-  stop() {
-    this.source.stop();
+  private stop(): void {
+    this.source && this.source.stop();
   }
 
-  private isPlaying() {
+  private isPlaying(): boolean {
     return this.source && this.source.playbackState === this.source.PLAYING_STATE;
   }
 };
 
-class toPlayer {
+class ToPlayer {
   constructor(
     public url: string,
     public artwork_url: string,
-    public description: string
+    public description: string,
+    public duration: string,
+    public artist: string,
+    public genre: string
   ) {}
+}
+
+interface TrackChange extends SimpleChange {
+  toPlayer: SimpleChange;
 }

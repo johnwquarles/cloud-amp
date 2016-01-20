@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component} from 'angular2/core';
+import {Component, ViewEncapsulation} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 import {HTTP_PROVIDERS} from 'angular2/http';
@@ -13,11 +13,12 @@ import {AmpMain} from './components/ampMain/ampMain';
  * Top Level Component
  */
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'app',
   providers: [...FORM_PROVIDERS, ...HTTP_PROVIDERS ],
   directives: [...ROUTER_DIRECTIVES ],
   pipes: [],
-  styles: [],
+  styles: [ require('./app.scss') ],
   template: require('./app.jade')
 })
 @RouteConfig([

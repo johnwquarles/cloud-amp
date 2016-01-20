@@ -1,4 +1,3 @@
-.queue
-  h1 queue!
-  .track-menu(*ngFor="#track of trackList")
+.queue.row
+  .col-sm-4(*ngFor="#track of trackList")
     individual-track([trackObj]="track", (emitTrackObj)="receiveTrackObj($event)")
