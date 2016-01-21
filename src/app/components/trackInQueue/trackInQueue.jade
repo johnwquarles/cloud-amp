@@ -1,3 +1,6 @@
-.track((click)="sendTrackObj()")
-  img(src="{{trackObj.artwork_url}}")
-  span {{trackObj.title}}
+.row.track((click)="sendTrackObj()", [ngStyle]="{'background-color': backgroundColor}")
+  .col-xs-4.no-pad
+    img(src="{{trackObj.artwork_url_small}}")
+  .col-xs-8
+    p.title.italic([ngStyle]="{'color': detailColor}") {{trackObj.title}}
+    p.artist.italic([ngStyle]="{'color': secondaryColor}") {{trackObj.artist}}

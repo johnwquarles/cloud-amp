@@ -1,20 +1,22 @@
 // TODO: duration of song, fontawesome (play and stop icons, not text, but still color them)
 
-.row.player(*ngIf="toPlayer.title", [ngStyle]="{'background-color': backgroundColor, 'border': '4px solid ' + primaryColor}")
+.row.player(*ngIf="toPlayer.title", [ngStyle]="{'background-color': backgroundColor, 'border-top': '2vh solid ' + primaryColor}")
   .col-xs-12.art-overlay([ngStyle]="{'background': overlayGradient + ', url(' + toPlayer.artwork_url + ') no-repeat center'}")
     .row
-      .col-sm-4.artwork
+      .col-sm-3.artwork.no-pad
         img.img-responsive(src="{{toPlayer.artwork_url}}")
-      .col-sm-8
-        .row
-          .col-sm-8.col-sm-offset-2.centered
+      .col-sm-9
+        .row.main-controls
+          .col-xs-12.centered
+            button.btn.btn-success.pull-left([ngStyle]="{'background-color': detailColor, 'border-color': primaryColor, 'color': backgroundColor}", (click)="play()")
+              i.fa.fa-3x.fa-play
             h2.title([ngStyle]="{'color': detailColor}") {{toPlayer.title}}
             h4.artist.italic([ngStyle]="{'color': secondaryColor}") {{toPlayer.artist}}
-          .col-xs-12
-            p([ngStyle]="{'color': primaryColor}") {{toPlayer.description}}
+            button.btn.btn-danger.pull-right([ngStyle]="{'background-color': primaryColor, 'border-color': detailColor, 'color': backgroundColor}", (click)="stop()")
+              i.fa.fa-3x.fa-stop
           .col-xs-12.centered
-            button.btn.btn-success.pull-left([ngStyle]="{'background-color': detailColor, 'border-color': primaryColor, 'color': backgroundColor}", (click)="play()") Play
             span.playback-rate-value([ngStyle]="{'color': detailColor}") {{slider.value}}
-            button.btn.btn-danger.pull-right([ngStyle]="{'background-color': primaryColor, 'border-color': detailColor, 'color': backgroundColor}", (click)="stop()") Stop
           .col-xs-12
             input.playback-rate-control((input)="source.playbackRate.value = slider.value", type="range", min="0.25", max="1.75", step="0.01", value="1" #slider)
+          .col-xs-12
+            p([ngStyle]="{'color': primaryColor}") {{toPlayer.description}}

@@ -1,5 +1,8 @@
 .player {
   display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 
   .art-overlay {
     background-size: cover !important;
@@ -8,36 +11,38 @@
   .title,
   .artist {
     text-transform: uppercase;
+    font-family: 'Monda', sans-serif;
     font-weight: 800;
+
   }
 
-  .italic {
-    font-style: italic;
+  .title {
+    font-size: 3rem;
+  }
+
+  p {
+    font-family: 'Monda', sans-serif;
   }
 
   .artwork {
     img {
-      margin: 15px auto 15px;
-      min-width: 40vw;
       // import variables!
       @media (min-width: 768px) {
-        width: 100%;
         min-width: 0;
       }
     }
   }
+  .main-controls {
+    padding: 2rem;
+    max-height: 300px;
+    overflow: scroll;
+    button {
+      padding: 0.6rem 3rem;
+    }
 
-  button {
-    text-transform: uppercase;
-    font-weight: 800;
-  }
-
-  .playback-rate-value {
-    font-size: 2.6rem;
-    text-align: center;
-  }
-
-  .centered {
-    text-align: center;
+    .playback-rate-value {
+      font-size: 4rem;
+      text-align: center;
+    }
   }
 }

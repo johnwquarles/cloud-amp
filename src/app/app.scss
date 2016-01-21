@@ -1,1 +1,12 @@
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap";
+
+.italic { font-style: italic; }
+.centered { text-align: center; }
+.no-pad {
+  padding: 0;
+}
+
+.app {
+  background-color: black;
+  height: 100vh;
+}

@@ -1,6 +1,6 @@
 import {Component, Input, HostBinding, SimpleChange} from 'angular2/core';
-
 let ImageAnalyzer = require('../../services/AverageColor.ts');
+let artworkPicker = require('../../services/selectArt.ts');
 
 @Component({
   selector: 'player',
@@ -41,7 +41,6 @@ export class Player {
         this.secondaryColor = `rgb(${secondaryColor})`;
         this.detailColor = `rgb(${detailColor})`;
         this.overlayGradient = `linear-gradient(rgba(${bgColor},0.8) 0, rgba(${bgColor},0.8) 100%)`;
-        console.log(bgColor, primaryColor, secondaryColor, detailColor, this.overlayGradient);
       });
     }
   }

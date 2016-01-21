@@ -1,6 +1,7 @@
 import {Component, EventEmitter} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 import {Http} from 'angular2/http';
+let artworkPicker = require('../../services/selectArt.ts');
 
 @Component({
   outputs: ['addNewTrack'],
@@ -14,6 +15,8 @@ export class UrlInput {
   get_track_id_url: string;
   get_track_from_id_url: string;
   addNewTrack: EventEmitter<Object>;
+  small_artwork_setting: string;
+  artwork_setting: string;
 
   constructor(http: Http) {
     this.CLIENT_ID = '02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea';
@@ -21,6 +24,8 @@ export class UrlInput {
     this.get_track_from_id_url = 'http://api.soundcloud.com/i1/tracks/';
     this.addNewTrack = new EventEmitter();
     this.http = http;
+    this.small_artwork_setting = 't67x67';
+    this.artwork_setting = 't300x300';
   }
 
   enterUrl(url) {
@@ -30,12 +35,13 @@ export class UrlInput {
   get_track_id_obj(url) {
     this.http.get(`${this.get_track_id_url}${url}&client_id=${this.CLIENT_ID}`)
              .map(res => {
+               console.log(res);
                return this.prune_id_response(res.json());
              })
              .subscribe(
                data => this.get_track_url(data),
                err => this.logError(err),
-               () => { console.log('get_track_id succeeded'); }
+               () => console.log('get_track_id succeeded')
              );
   }
 
@@ -48,9 +54,9 @@ export class UrlInput {
              })
              .subscribe(
                // event is emitted here!
-               data => { this.addNewTrack.emit(data); },
+               data => this.addNewTrack.emit(data),
                err => this.logError(err),
-               () => { console.log('resolved track url succesfully'); }
+               () => console.log('resolved track url succesfully')
              );
   }
 
@@ -61,7 +67,8 @@ export class UrlInput {
   prune_id_response(res) {
     return {
       title: res.title,
-      artwork_url: res.artwork_url,
+      artwork_url_small: artworkPicker(res.artwork_url, this.small_artwork_setting),
+      artwork_url: artworkPicker(res.artwork_url, this.artwork_setting),
       description: res.description,
       id: res.id,
       genre: res.genre,

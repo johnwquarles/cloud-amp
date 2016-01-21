@@ -16,6 +16,7 @@
     "./src/app/components/trackInQueue/trackInQueue.ts",
     "./src/app/components/urlInput/urlInput.ts",
     "./src/app/services/AverageColor.ts",
+    "./src/app/services/selectArt.ts",
     "./src/main.ts",
     "./src/vendor.ts"
   ],

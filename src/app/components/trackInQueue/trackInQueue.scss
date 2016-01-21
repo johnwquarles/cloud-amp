@@ -1,0 +1,17 @@
+.track {
+  cursor: pointer;
+  font-family: 'Monda', sans-serif;
+
+  .title,
+  .artist {
+    margin: 0.4rem 0 0;
+    width: 100%;
+  }
+  .title {
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .artist {
+    font-size: 0.9rem
+  }
+}
