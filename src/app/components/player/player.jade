@@ -1,6 +1,6 @@
 // TODO: duration of song, fontawesome (play and stop icons, not text, but still color them)
 
-.row.player(*ngIf="toPlayer.title", [ngStyle]="{'background-color': backgroundColor, 'border-top': '2vh solid ' + primaryColor}")
+.row.player(*ngIf="toPlayer.title", [ngStyle]="{'background-color': backgroundColor, 'border-top': '2vh solid ' + backgroundColor}")
   .col-xs-12.art-overlay([ngStyle]="{'background': overlayGradient + ', url(' + toPlayer.artwork_url + ') no-repeat center'}")
     .row
       .col-sm-3.artwork.no-pad

@@ -10,10 +10,10 @@
 
   .title,
   .artist {
+    display: inline-block;
     text-transform: uppercase;
     font-family: 'Monda', sans-serif;
     font-weight: 800;
-
   }
 
   .title {
@@ -26,7 +26,7 @@
 
   .artwork {
     img {
-      // import variables!
+      // import variables for media queries!
       @media (min-width: 768px) {
         min-width: 0;
       }
@@ -38,8 +38,18 @@
     overflow: scroll;
     button {
       padding: 0.6rem 3rem;
+      &:focus { outline: 0; }
     }
-
+    button {
+      transition: box-shadow 200ms ease-in;
+      &:hover {
+        -webkit-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
+        .fa-play, .fa-stop {
+        }
+      }
+    }
     .playback-rate-value {
       font-size: 4rem;
       text-align: center;
