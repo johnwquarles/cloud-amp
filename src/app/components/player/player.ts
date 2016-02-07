@@ -18,6 +18,9 @@ export class Player {
   public overlayColor: string;
   public overlayGradient: string;
 
+  private isPlaying: boolean;
+  private isPaused: boolean;
+
   private coors_proxy: string;
   private context: any;
   private source: any;
@@ -26,15 +29,21 @@ export class Player {
   constructor() {
     this.coors_proxy = 'https://crossorigin.me/';
     this.context = new AudioContext();
+
     this.backgroundColor = 'white';
     this.primaryColor = 'black';
     this.secondaryColor = 'black';
     this.detailColor = 'black';
+
+    this.isPlaying = false;
+    this.isPaused = false;
   }
 
   ngOnChanges(changes: TrackChange) {
     let trackAdded = changes.toPlayer && changes.toPlayer.currentValue;
     if (trackAdded) {
+      // need to keep (downloaded) tracks in an array in order to keep track of paused/play state
+      // for each source.
       ImageAnalyzer(trackAdded.artwork_url, (bgColor, primaryColor, secondaryColor, detailColor) => {
         this.backgroundColor = `rgb(${bgColor})`;
         this.primaryColor = `rgb(${primaryColor})`;
@@ -46,7 +55,16 @@ export class Player {
   }
 
   private play(): void {
-    if (this.isPlaying()) this.stop();
+    if (this.isPaused) {
+      this.context.resume();
+      this.isPlaying = true;
+      this.isPaused = false;
+      return;
+    }
+
+    if (this.isPlaying) this.stop();
+
+    this.isPlaying = true;
     let request = new XMLHttpRequest();
     request.open('GET', this.coors_proxy + this.toPlayer.url, true);
     request.responseType = 'arraybuffer';
@@ -64,12 +82,20 @@ export class Player {
 
   private stop(): void {
     this.source && this.source.stop();
+    this.isPaused = false;
+    this.isPlaying = false;
   }
 
-  private isPlaying(): boolean {
-    return this.source && this.source.playbackState === this.source.PLAYING_STATE;
+  private pause(): void {
+    this.context.suspend();
+    this.isPlaying = false;
+    this.isPaused = true;
   }
 };
+
+// private isPlaying(): boolean {
+//   return this.source && this.source.playbackState === this.source.PLAYING_STATE;
+// }
 
 class ToPlayer {
   constructor(

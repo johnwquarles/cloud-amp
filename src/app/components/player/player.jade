@@ -8,12 +8,14 @@
       .col-sm-9
         .row.main-controls
           .col-xs-12.centered
-            button.btn.btn-success.pull-left([ngStyle]="{'background-color': detailColor, 'border-color': primaryColor, 'color': backgroundColor}", (click)="play()")
-              i.fa.fa-3x.fa-play
+            button.btn.btn-success.pull-left(*ngIf="!isPlaying", [ngStyle]="{'background-color': detailColor, 'border-color': primaryColor, 'color': backgroundColor}", (click)="play()")
+              i.fa.fa-2x.fa-play
+            button.btn.btn-success.pull-left(*ngIf="isPlaying", [ngStyle]="{'background-color': detailColor, 'border-color': primaryColor, 'color': backgroundColor}", (click)="pause()")
+              i.fa.fa-2x.fa-pause
             h2.title([ngStyle]="{'color': detailColor}") {{toPlayer.title}}
             h4.artist.italic([ngStyle]="{'color': secondaryColor}") {{toPlayer.artist}}
             button.btn.btn-danger.pull-right([ngStyle]="{'background-color': primaryColor, 'border-color': detailColor, 'color': backgroundColor}", (click)="stop()")
-              i.fa.fa-3x.fa-stop
+              i.fa.fa-2x.fa-stop
           .col-xs-12.centered
             span.playback-rate-value([ngStyle]="{'color': detailColor}") {{slider.value}}
           .col-xs-12
