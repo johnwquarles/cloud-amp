@@ -14,7 +14,7 @@
               i.fa.fa-2x.fa-pause
             button.btn.btn-danger.pull-right([ngStyle]="{'background-color': primaryColor, 'border-color': detailColor, 'color': backgroundColor}", (click)="stop()")
               i.fa.fa-2x.fa-stop
-            h2.title([ngStyle]="{'color': detailColor}") {{toPlayer.title}}
+            h2.title([ngStyle]="{'color': detailColor, 'text-shadow': '-4px 3px 0 ' + backgroundColor}") {{toPlayer.title}}
             h4.artist.italic([ngStyle]="{'color': secondaryColor}") {{toPlayer.artist}}
           .col-xs-12.centered
             span.playback-rate-value([ngStyle]="{'color': detailColor}") {{slider.value}}
