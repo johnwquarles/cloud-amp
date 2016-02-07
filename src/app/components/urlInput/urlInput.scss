@@ -3,16 +3,17 @@
   input {
     width: 80%;
     padding: 2px;
-    border: 0;
     outline: none;
-    &:focus {
-      outline: none;
-    }
   }
   button {
     width: 20%;
     padding: 0;
     border-radius: 0;
+  }
+  input, button {
     border: 0;
+    &:focus {
+      outline: none;
+    }
   }
 }
