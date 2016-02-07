@@ -10,7 +10,7 @@
 
   .title,
   .artist {
-    display: inline-block;
+    display: block;
     text-transform: uppercase;
     font-family: 'Monda', sans-serif;
     font-weight: 800;
@@ -37,11 +37,10 @@
     max-height: 300px;
     overflow: scroll;
     button {
-      padding: 0.6rem 3rem;
+      padding: 0.8rem 1.9rem 0.6rem;
       &:focus { outline: 0; }
-    }
-    button {
       transition: box-shadow 200ms ease-in;
+      border: none;
       &:hover {
         -webkit-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);

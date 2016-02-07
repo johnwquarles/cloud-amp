@@ -1,6 +1,6 @@
 // TODO: duration of song, fontawesome (play and stop icons, not text, but still color them)
 
-.row.player(*ngIf="toPlayer.title", [ngStyle]="{'background-color': backgroundColor, 'border-top': '2vh solid ' + backgroundColor}")
+.row.player(*ngIf="toPlayer.title", [ngStyle]="{'background-color': backgroundColor}")
   .col-xs-12.art-overlay([ngStyle]="{'background': overlayGradient + ', url(' + toPlayer.artwork_url + ') no-repeat center'}")
     .row
       .col-sm-3.artwork.no-pad
@@ -8,14 +8,14 @@
       .col-sm-9
         .row.main-controls
           .col-xs-12.centered
-            button.btn.btn-success.pull-left(*ngIf="!isPlaying", [ngStyle]="{'background-color': detailColor, 'border-color': primaryColor, 'color': backgroundColor}", (click)="play()")
+            button.btn.btn-success.pull-left(*ngIf="!isPlaying", [ngStyle]="{'background-color': detailColor, 'color': backgroundColor}", (click)="play()")
               i.fa.fa-2x.fa-play
-            button.btn.btn-success.pull-left(*ngIf="isPlaying", [ngStyle]="{'background-color': detailColor, 'border-color': primaryColor, 'color': backgroundColor}", (click)="pause()")
+            button.btn.btn-success.pull-left(*ngIf="isPlaying", [ngStyle]="{'background-color': detailColor, 'color': backgroundColor}", (click)="pause()")
               i.fa.fa-2x.fa-pause
-            h2.title([ngStyle]="{'color': detailColor}") {{toPlayer.title}}
-            h4.artist.italic([ngStyle]="{'color': secondaryColor}") {{toPlayer.artist}}
             button.btn.btn-danger.pull-right([ngStyle]="{'background-color': primaryColor, 'border-color': detailColor, 'color': backgroundColor}", (click)="stop()")
               i.fa.fa-2x.fa-stop
+            h2.title([ngStyle]="{'color': detailColor}") {{toPlayer.title}}
+            h4.artist.italic([ngStyle]="{'color': secondaryColor}") {{toPlayer.artist}}
           .col-xs-12.centered
             span.playback-rate-value([ngStyle]="{'color': detailColor}") {{slider.value}}
           .col-xs-12
