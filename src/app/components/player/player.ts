@@ -21,6 +21,8 @@ export class Player {
   private isPlaying: boolean;
   private isPaused: boolean;
 
+  private currentPitch: number;
+
   private coors_proxy: string;
   private context: any;
   private source: any;
@@ -74,6 +76,7 @@ export class Player {
         this.source.buffer = decodedBuffer;
         this.source.connect(this.context.destination);
         // want to access #slider here (from the markup). How?
+        if (this.currentPitch) this.source.playbackRate.value = this.currentPitch;
         this.source.start(0);
       });
     };
@@ -90,6 +93,11 @@ export class Player {
     this.context.suspend();
     this.isPlaying = false;
     this.isPaused = true;
+  }
+
+  private pitchChange(value): void {
+    this.source.playbackRate.value = value;
+    this.currentPitch = value;
   }
 };
 
