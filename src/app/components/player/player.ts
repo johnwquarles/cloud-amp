@@ -20,6 +20,7 @@ export class Player {
 
   private isPlaying: boolean;
   private isPaused: boolean;
+  private isDownloading: boolean;
 
   private currentPitch: number;
 
@@ -27,6 +28,8 @@ export class Player {
   private context: any;
   private source: any;
   private ImageAnalyzer: any;
+
+  private trackArr: Array<any>;
 
   constructor() {
     this.coors_proxy = 'https://crossorigin.me/';
@@ -39,6 +42,9 @@ export class Player {
 
     this.isPlaying = false;
     this.isPaused = false;
+    this.isDownloading = false;
+
+    this.trackArr = [];
   }
 
   ngOnChanges(changes: TrackChange) {
@@ -46,6 +52,27 @@ export class Player {
     if (trackAdded) {
       // need to keep (downloaded) tracks in an array in order to keep track of paused/play state
       // for each source.
+
+      // if there is no single trackObj in trackArr for which its title is the same as the current track in the player
+      if (!this.trackArr.reduce(
+        function(acc, track) {
+          return acc || (track.title && (track.title === trackAdded.title));
+        }, false)
+      ) {
+        this.isDownloading = true;
+        let trackObj:any = {};
+        let request = new XMLHttpRequest();
+        request.open('GET', this.coors_proxy + trackAdded.url, true);
+        request.responseType = 'arraybuffer';
+        request.onload = () => {
+          trackObj.title = trackAdded.title;
+          trackObj.data = request.response;
+          this.trackArr.push(trackObj);
+          this.isDownloading = false;
+        };
+      request.send();
+      }
+
       ImageAnalyzer(trackAdded.artwork_url, (bgColor, primaryColor, secondaryColor, detailColor) => {
         this.backgroundColor = `rgb(${bgColor})`;
         this.primaryColor = `rgb(${primaryColor})`;
@@ -63,24 +90,22 @@ export class Player {
       this.isPaused = false;
       return;
     }
-
     if (this.isPlaying) this.stop();
-
     this.isPlaying = true;
-    let request = new XMLHttpRequest();
-    request.open('GET', this.coors_proxy + this.toPlayer.url, true);
-    request.responseType = 'arraybuffer';
-    request.onload = () => {
-      this.context.decodeAudioData(request.response, (decodedBuffer) => {
-        this.source = this.context.createBufferSource();
-        this.source.buffer = decodedBuffer;
-        this.source.connect(this.context.destination);
-        // want to access #slider here (from the markup). How?
-        if (this.currentPitch) this.source.playbackRate.value = this.currentPitch;
-        this.source.start(0);
-      });
-    };
-    request.send();
+
+    let correctTrackObj;
+    this.trackArr.forEach((trackObj) => {
+      if (trackObj.title === this.toPlayer.title) {
+        correctTrackObj = trackObj;
+      }
+    });
+    this.source = this.context.createBufferSource();
+    this.context.decodeAudioData(correctTrackObj.data, (decodedBuffer) => {
+      this.source.buffer = decodedBuffer;
+    });
+    this.source.connect(this.context.destination);
+    if (this.currentPitch) this.source.playbackRate.value = this.currentPitch;
+    this.source.start(0);
   }
 
   private stop(): void {
@@ -112,7 +137,8 @@ class ToPlayer {
     public description: string,
     public duration: string,
     public artist: string,
-    public genre: string
+    public genre: string,
+    public title: string
   ) {}
 }
 
