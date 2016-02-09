@@ -3,6 +3,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  width: calc(100% + 15px);
 
   .art-overlay {
     background-size: cover !important;
@@ -44,6 +45,7 @@
       &:focus { outline: 0; }
       transition: box-shadow 200ms ease-in;
       border: none;
+      border-radius: 0;
       &:hover {
         -webkit-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.75);
