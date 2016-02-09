@@ -19,6 +19,6 @@
           .col-xs-12.centered
             span.playback-rate-value([ngStyle]="{'color': detailColor}") {{slider.value}}
           .col-xs-12
-            input.playback-rate-control((input)="pitchChange(slider.value)", type="range", min="0.25", max="1.75", step="0.01", value="1" #slider)
+            input.playback-rate-control([ngStyle]="{'background': detailColor}", (input)="pitchChange(slider.value)", type="range", min="0.25", max="1.75", step="0.01", value="1" #slider)
           .col-xs-12.centered
             p([ngStyle]="{'color': primaryColor}") {{toPlayer.description}}
