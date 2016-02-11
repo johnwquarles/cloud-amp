@@ -1,4 +1,4 @@
-import {Component, Input, HostBinding, SimpleChange} from 'angular2/core';
+import {Component, Input, HostBinding, SimpleChange, NgZone} from 'angular2/core';
 let ImageAnalyzer = require('../../services/AverageColor.ts');
 let artworkPicker = require('../../services/selectArt.ts');
 
@@ -18,6 +18,8 @@ export class Player {
   public overlayColor: string;
   public overlayGradient: string;
 
+  private zone: NgZone;
+
   private isPlaying: boolean;
   private isPaused: boolean;
   private isDownloading: boolean;
@@ -31,7 +33,8 @@ export class Player {
 
   private trackArr: Array<any>;
 
-  constructor() {
+  constructor(zone: NgZone) {
+    this.zone = zone;
     this.coors_proxy = 'https://crossorigin.me/';
     this.context = new AudioContext();
 
@@ -106,10 +109,9 @@ export class Player {
     this.source.connect(this.context.destination);
     if (this.currentPitch) this.source.playbackRate.value = this.currentPitch;
     this.source.onended = () => {
-      console.log('trying to stop!');
-      console.log(this.isPlaying);
-      this.stop();
-      console.log(this.isPlaying);
+      this.zone.run(() => {
+        this.stop();
+      });
     }
     this.source.start(0);
   }
