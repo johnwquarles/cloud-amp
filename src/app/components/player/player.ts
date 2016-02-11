@@ -105,6 +105,12 @@ export class Player {
     });
     this.source.connect(this.context.destination);
     if (this.currentPitch) this.source.playbackRate.value = this.currentPitch;
+    this.source.onended = () => {
+      console.log('trying to stop!');
+      console.log(this.isPlaying);
+      this.stop();
+      console.log(this.isPlaying);
+    }
     this.source.start(0);
   }
 
