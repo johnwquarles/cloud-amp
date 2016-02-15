@@ -38,7 +38,6 @@ export class Player {
     this.coors_proxy = 'https://crossorigin.me/';
     this.context = new AudioContext();
 
-    // change?
     this.backgroundColor = 'white';
     this.primaryColor = 'black';
     this.secondaryColor = 'black';
