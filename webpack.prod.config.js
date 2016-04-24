@@ -93,9 +93,19 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      { test: /\.html$/,  loader: 'raw-loader' },
 
-      // if you add a loader include the file extension
+      // Support for .jade files.
+      {
+        test: /\.jade$/,
+        loader: 'raw-loader!jade-html-loader',
+        exclude: /node_modules/
+      },
+      // Support for .scss files.
+      {
+        test: /\.scss$/,
+        loader: 'raw-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader'
+      }
     ]
   },
 
@@ -161,7 +171,7 @@ module.exports = {
   // Other module loader config
   tslint: {
     emitErrors: true,
-    failOnHint: true
+    failOnHint: false
   },
   // don't use devServer for production
 
