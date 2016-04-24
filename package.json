@@ -9,6 +9,7 @@
     "clean": "rimraf node_modules doc typings coverage dist && npm cache clean",
     "clean:dist": "rimraf dist",
     "clean:install": "npm run clean && npm install",
+    "clean:source": "rimraf README.md src *.json *.js LICENSE assets",
     "clean:start": "npm run clean && npm start",
     "watch": "npm run watch:dev",
     "watch:dev": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
@@ -92,5 +93,11 @@
   "engines": {
     "node": ">= 4.2.1 <= 5",
     "npm": ">= 3"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "dist",
+    "post": [
+      "clean:source"
+    ]
   }
 }
