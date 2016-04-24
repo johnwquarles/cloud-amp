@@ -27,7 +27,7 @@ var UrlInput = (function () {
             .map(function (res) {
             return _this.prune_id_response(res.json());
         })
-            .subscribe(function (data) { return _this.get_track_url(data); }, function (err) { return _this.logError(err); }, function () { console.log('get_track_id succeeded'); });
+            .subscribe(function (data) { return _this.get_track_url(data); }, function (err) { return _this.logError(err); });
     };
     UrlInput.prototype.get_track_url = function (obj) {
         var _this = this;
@@ -37,10 +37,10 @@ var UrlInput = (function () {
             delete obj.id;
             return obj;
         })
-            .subscribe(function (data) { _this.addNewTrack.emit(data); }, function (err) { return _this.logError(err); }, function () { console.log('resolved track url succesfully'); });
+            .subscribe(function (data) { _this.addNewTrack.emit(data); }, function (err) { return _this.logError(err); });
     };
     UrlInput.prototype.logError = function (err) {
-        console.log("error: " + err);
+        console.warn("error: " + err);
     };
     UrlInput.prototype.prune_id_response = function (res) {
         return {
@@ -57,7 +57,7 @@ var UrlInput = (function () {
             selector: 'url-input',
             styles: [require('./urlInput.scss')],
             template: require('./urlInput.jade')
-        }), 
+        }),
         __metadata('design:paramtypes', [http_1.Http])
     ], UrlInput);
     return UrlInput;

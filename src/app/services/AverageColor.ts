@@ -59,7 +59,7 @@ module.exports = function(image, callback) {
       }
       return proposedEdgeColor[0];
     } else {
-      return "256, 256, 256";
+      return '256, 256, 256';
     }
   };
   findTextColors = function(cvs, ctx, cb) {
@@ -109,7 +109,7 @@ module.exports = function(image, callback) {
         break;
       }
     }
-    defaultColor = findDarkTextColor ? "0,0,0" : "255,255,255";
+    defaultColor = findDarkTextColor ? '0,0,0' : '255,255,255';
     if (!primaryColor) {
       primaryColor = defaultColor;
     }

@@ -21,11 +21,9 @@ var AmpMain = (function () {
         };
     }
     AmpMain.prototype.addToQueue = function ($event) {
-        console.log("received event: " + JSON.stringify($event));
         this.trackToAdd = $event;
     };
     AmpMain.prototype.sendTrackToPlayer = function ($event) {
-        console.log("will send to player: " + JSON.stringify($event));
         this.sendToPlayer = $event;
     };
     AmpMain = __decorate([
@@ -33,7 +31,7 @@ var AmpMain = (function () {
             styles: [require('./ampMain.scss')],
             directives: [queue_1.Queue, urlInput_1.UrlInput, player_1.Player],
             template: require('./ampMain.jade')
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AmpMain);
     return AmpMain;

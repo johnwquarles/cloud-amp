@@ -26,14 +26,10 @@ var Queue = (function () {
                 return acc || Object.keys(track).reduce(function (acc, prop) {
                     if (prop === 'url')
                         return acc || false;
-                    console.log(prop, track[prop], trackAdded[prop]);
                     return acc || (track[prop] === trackAdded[prop]);
                 }, false);
             }, false)) {
                 this.trackList.push(trackAdded);
-            }
-            else {
-                console.log('track was not unique to the queue');
             }
         }
     };
@@ -45,7 +41,7 @@ var Queue = (function () {
             directives: [trackInQueue_1.TrackInQueue],
             styles: [require('./queue.scss')],
             template: require('./queue.jade')
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], Queue);
     return Queue;

@@ -26,7 +26,6 @@ export class Player {
 
   private currentPitch: number;
 
-  private coors_proxy: string;
   private context: any;
   private source: any;
   private ImageAnalyzer: any;
@@ -35,7 +34,6 @@ export class Player {
 
   constructor(zone: NgZone) {
     this.zone = zone;
-    this.coors_proxy = 'https://crossorigin.me/';
     this.context = new AudioContext();
 
     this.backgroundColor = 'white';
@@ -56,16 +54,17 @@ export class Player {
       // need to keep (downloaded) tracks in an array in order to keep track of paused/play state
       // for each source.
 
-      // if there is no single trackObj in trackArr for which its title is the same as the current track in the player
+      // if there is no single trackObj in trackArr for which
+      // its title is the same as the current track in the player
       if (!this.trackArr.reduce(
         function(acc, track) {
           return acc || (track.title && (track.title === trackAdded.title));
         }, false)
       ) {
         this.isDownloading = true;
-        let trackObj:any = {};
+        let trackObj: any = {};
         let request = new XMLHttpRequest();
-        request.open('GET', this.coors_proxy + trackAdded.url, true);
+        request.open('GET', trackAdded.url, true);
         request.responseType = 'arraybuffer';
         request.onload = () => {
           trackObj.title = trackAdded.title;
@@ -112,12 +111,12 @@ export class Player {
       this.zone.run(() => {
         this.stop();
       });
-    }
+    };
     this.source.start(0);
   }
 
   private stop(): void {
-    this.source && this.source.stop();
+    if (this.source) this.source.stop();
     this.isPaused = false;
     this.isPlaying = false;
   }

@@ -4,8 +4,8 @@ module.exports = (artwork_url: string, selection: string): string => {
   let replaceThis;
   types.forEach(type => {
     if (artwork_url.indexOf(type) > -1) {
-      replaceThis = type
+      replaceThis = type;
     }
   });
   return artwork_url.replace(replaceThis, selection);
-}
+};
