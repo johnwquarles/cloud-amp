@@ -9,7 +9,7 @@
     "clean": "rimraf node_modules doc typings coverage dist && npm cache clean",
     "clean:dist": "rimraf dist",
     "clean:install": "npm run clean && npm install",
-    "clean:source": "rimraf README.md src *.json *.js LICENSE assets",
+    "clean:source": "rimraf README.md src LICENSE",
     "clean:start": "npm run clean && npm start",
     "deploy": "gh-pages-deploy",
     "watch": "npm run watch:dev",
