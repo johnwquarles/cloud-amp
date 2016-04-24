@@ -31,10 +31,10 @@ export class Queue {
       // can't just do deep equality because the urls come back slightly different each time.
       if (!this.trackList.reduce( (acc, track) => {
         return acc || Object.keys(track).reduce( (acc, prop) => {
-          if (prop === 'url') return acc || false;
+          if (prop === 'url') return acc && true;
           console.log(prop, track[prop], trackAdded[prop]);
-          return acc || (track[prop] === trackAdded[prop]);
-        }, false);
+          return acc && (track[prop] === trackAdded[prop]);
+        }, true);
       }, false)) {
         this.trackList.push(trackAdded);
       } else { console.log('track was not unique to the queue'); }
