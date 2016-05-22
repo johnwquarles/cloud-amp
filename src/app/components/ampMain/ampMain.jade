@@ -1,8 +1,0 @@
-.container-fluid
-  .row.ampMain
-    .col-sm-4.col-sm-offset-4
-      url-input((addNewTrack)="addToQueue($event)")
-    .col-xs-12
-      queue([inputTrack]="trackToAdd", (emitClickedTrack)="sendTrackToPlayer($event)")
-    .col-xs-12
-      player([toPlayer]="sendToPlayer")
