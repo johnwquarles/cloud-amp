@@ -12,7 +12,7 @@ var core_1 = require('angular2/core');
 var http_1 = require('angular2/http');
 var UrlInput = (function () {
     function UrlInput(http) {
-        this.CLIENT_ID = '02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea';
+        this.CLIENT_ID = 'JlZIsxg2hY5WnBgtn3jfS0UYCl0K8DOg';
         this.get_track_id_url = 'http://api.soundcloud.com/resolve.json?url=';
         this.get_track_from_id_url = 'http://api.soundcloud.com/i1/tracks/';
         this.addNewTrack = new core_1.EventEmitter();
